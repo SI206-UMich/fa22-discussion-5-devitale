@@ -1,5 +1,5 @@
 import unittest
-
+#first commit
 # Counts the number of a's in a sentence (e.g., a string)
 def count_a(sentence):
 	total = 0
@@ -38,14 +38,35 @@ class Warehouse:
 
 	# Adds an item to the warehouse	
 	def add_item(self, item):
+		self.items.append(item)
 		pass
 
 	# Returns the item in the warehouse with the most stock		
 	def get_max_stock(self):
+		max_item = None
+		max_stock = 0
+		for item in self.items:
+			if max_item == None:
+				max_item = item.name
+				max_stock = item,max_stock
+			elif max_stock < item.stock:
+				max_item = item.name
+				max_stock = item.stock
+			return max_item
 		pass
 	
 	# Returns the item in the warehouse with the highest price
 	def get_max_price(self):
+		max_item = None
+		max_price = 0
+		for item in self.items:
+			if max_item == None:
+				max_item = item.name
+				max_price = item.price
+			elif max_price < item.price:
+				max_item = item.name
+			return max_item
+
 		pass	
 
 
@@ -63,21 +84,38 @@ class TestAllMethods(unittest.TestCase):
 
 	## Check to see whether count_a works
 	def test_count_a(self):
+		aa_count = count_a('aaa')
+		self.assertEqual(aa_count, 3)
+		abc_count = count_a("abcabc")
+		self.assertEqual(abc_count, 2)
 		pass
 
 
 	## Check to see whether you can add an item to the warehouse
 	def test_add_item(self):
+		warehouse1 = Warehouse()
+		warehouse1.add_item(self.item1)
+		warehouse1.add_item(self.item2)
+		warehouse1.add_item(self.item3)
+		self.assertEqual(warehouse1.items,[self.item1, self.item2, self.item3])
 		pass
 
 
 	## Check to see whether warehouse correctly returns the item with the most stock
 	def test_warehouse_max_stocks(self):
+		warehouse1 = Warehouse()
+		self.assertEqual(warehouse1.get_max_stock(),None)
+		warehouse2 = Warehouse([self.item1, self.item2])
+		self.assertEqual(warehouse2.get_max_stock())
 		pass
 
 
 	# Check to see whether the warehouse correctly return the item with the highest price
 	def test_warehouse_max_price(self):
+		warehouse1 = Warehouse()
+		self.assertEqual(warehouse1.get_max_price())
+		warehouse2 = Warehouse([self.item1, self.item2])
+		self.assertEqual(warehouse2.get_max_prcie())
 		pass
 		
 
